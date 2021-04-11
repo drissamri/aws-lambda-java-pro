@@ -39,6 +39,7 @@ public class AddFavoriteLambda implements RequestHandler<APIGatewayV2HTTPEvent, 
                     .withStatusCode(HttpStatusCode.OK)
                     .withBody(jsonMapper.asString(savedFavorite))
                     .build();
+
         } catch (Exception ex) {
             LOG.error("Exception: {}", ex.getMessage());
             response = createErrorResponse();
