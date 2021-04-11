@@ -1,0 +1,43 @@
+{
+  "version":"2.0",
+  "routeKey":"$default",
+  "rawPath":"/favorites",
+  "rawQueryString":"",
+  "cookies":[],
+  "headers":{},
+  "queryStringParameters":{},
+  "requestContext":{
+    "accountId":"123456789012",
+    "apiId":"api-id",
+    "authorizer":{
+      "jwt":{
+        "claims":{
+          "claim1":"value1",
+          "claim2":"value2"
+        },
+        "scopes":[
+          "scope1",
+          "scope2"
+        ]
+      }
+    },
+    "domainName":"id.execute-api.eu-west-1.amazonaws.com",
+    "domainPrefix":"id",
+    "http":{
+      "method":"POST",
+      "path":"/favorites",
+      "protocol":"HTTP/1.1",
+      "sourceIp":"IP",
+      "userAgent":"agent"
+    },
+    "requestId":"id",
+    "routeKey":"$default",
+    "stage":"$default",
+    "time":"12/Mar/2020:19:03:58 +0000",
+    "timeEpoch":1583348638390
+  },
+  "pathParameters":{},
+  "body": "{\"name\": \"driss\"}",
+  "isBase64Encoded":false,
+  "stageVariables":{}
+}

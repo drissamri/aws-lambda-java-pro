@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless Favorites Service
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+  RetentionInDays:
+    Type: Number
+    Default: 7
+    Description: CloudWatch Logs retention period for Lambda functions
+
+Resources:
+  AddFavoriteLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: java11
+      MemorySize: 3072
+      Handler: com.drissamri.favorites.AddFavoriteLambda::handleRequest
+      CodeUri: target/lambda.zip
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref FavoritesTable
+      Layers:
+        - arn:aws:lambda:eu-west-1:956778177063:layer:java-optimization-layer:1
+      Tracing: Active
+      Environment:
+        Variables:
+          ENVIRONMENT: !Ref Environment
+          FAVORITE_TABLE: !Ref FavoritesTable
+          AWS_LAMBDA_EXEC_WRAPPER: /opt/java-exec-wrapper
+
+      Events:
+        addFavorite:
+          Type: HttpApi
+          Properties:
+            Path: /favorites
+            Method: POST
+            PayloadFormatVersion: "2.0"
+
+  AddFavoriteLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AddFavoriteLambda}"
+      RetentionInDays: !Ref RetentionInDays
+
+  FavoritesTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+
+Outputs:
+  AddFavoriteApiEndpoint:
+    Description: "HTTP API endpoint URL"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/favorites"
