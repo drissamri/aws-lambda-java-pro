@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 public class FavoriteService {
     private DynamoDbAsyncTable<Favorite> favoritesTable;
 
-    public FavoriteService(DynamoDbAsyncTable<Favorite> favoritesTable) throws ExecutionException, InterruptedException {
+    public FavoriteService(DynamoDbAsyncTable<Favorite> favoritesTable) {
         this.favoritesTable = favoritesTable;
     }
 
