@@ -92,7 +92,19 @@
             <groupId>io.symphonia</groupId>
             <artifactId>lambda-logging</artifactId>
             <version>1.0.3</version>
+            <classifier>no-config</classifier>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-jackson</artifactId>
+            <version>0.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-json-classic</artifactId>
+            <version>0.1.5</version>
+        </dependency>
+
 
         <!-- Testing -->
         <dependency>
@@ -113,6 +125,7 @@
             <version>3.11.2</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 

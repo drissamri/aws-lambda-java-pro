@@ -22,14 +22,12 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FavoritesTable
-      Layers:
-        - arn:aws:lambda:eu-west-1:956778177063:layer:java-optimization-layer:1
       Tracing: Active
+      Timeout: 30
       Environment:
         Variables:
           ENVIRONMENT: !Ref Environment
           FAVORITE_TABLE: !Ref FavoritesTable
-          AWS_LAMBDA_EXEC_WRAPPER: /opt/java-exec-wrapper
 
       Events:
         addFavorite:
