@@ -104,10 +104,18 @@
             <artifactId>logback-json-classic</artifactId>
             <version>0.1.5</version>
         </dependency>
+
+
+        <!-- OpenTelemetry -->
         <dependency>
-            <groupId>com.signalfx</groupId>
-            <artifactId>otel-java-lambda-wrapper</artifactId>
-            <version>1.0.0</version>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api-metrics</artifactId>
+            <version>1.5.0-alpha</version>
         </dependency>
 
         <!-- Testing -->

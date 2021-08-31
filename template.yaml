@@ -24,8 +24,11 @@ Resources:
             TableName: !Ref FavoritesTable
       Tracing: Active
       Timeout: 30
+      Layers:
+        - arn:aws:lambda:eu-west-1:901920570463:layer:aws-otel-java-wrapper-ver-1-5-0:2
       Environment:
         Variables:
+          AWS_LAMBDA_EXEC_WRAPPER: /opt/otel-proxy-handler
           ENVIRONMENT: !Ref Environment
           FAVORITE_TABLE: !Ref FavoritesTable
 
@@ -52,4 +55,4 @@ Resources:
 Outputs:
   AddFavoriteApiEndpoint:
     Description: "REST API endpoint URL"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/favorites"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/favorites"
