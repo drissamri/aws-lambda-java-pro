@@ -104,7 +104,11 @@
             <artifactId>logback-json-classic</artifactId>
             <version>0.1.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.signalfx</groupId>
+            <artifactId>otel-java-lambda-wrapper</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
         <!-- Testing -->
         <dependency>

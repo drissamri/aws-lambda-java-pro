@@ -24,10 +24,17 @@ Resources:
             TableName: !Ref FavoritesTable
       Tracing: Active
       Timeout: 30
+      Layers:
+        - arn:aws:lambda:eu-west-1:254067382080:layer:splunk-lambda-extension:1
       Environment:
         Variables:
           ENVIRONMENT: !Ref Environment
           FAVORITE_TABLE: !Ref FavoritesTable
+          OTEL_INSTRUMENTATION_AWS_LAMBDA_HANDLER: com.drissamri.favorites.AddFavoriteLambda::handleRequest"
+          OTEL_LAMBDA_HANDLER: com.drissamri.favorites.AddFavoriteLambda::handleRequest"
+          SPLUNK_ACCESS_TOKEN: 4s8o3Q-WXuX-ioNT6A4WHA
+          SPLUNK_REALM: eu0
+          FAST_INGEST: true
 
       Events:
         addFavorite:
