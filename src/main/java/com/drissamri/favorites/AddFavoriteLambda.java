@@ -1,6 +1,8 @@
 package com.drissamri.favorites;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse;
 import com.drissamri.favorites.config.AppConfig;
@@ -13,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.http.HttpStatusCode;
 
-public class AddFavoriteLambda extends TracingRequestWrapper {
+public class AddFavoriteLambda {
     private static final Logger LOG = LoggerFactory.getLogger(AddFavoriteLambda.class);
     private FavoriteService favoriteService;
     private JSON jsonMapper;
@@ -26,18 +28,17 @@ public class AddFavoriteLambda extends TracingRequestWrapper {
         this.favoriteService = favoriteService;
         this.jsonMapper = jsonMapper;
     }
-    
-    public APIGatewayV2HTTPResponse handleRequest(APIGatewayV2HTTPEvent input, Context context) {
-        APIGatewayV2HTTPResponse response;
+
+    public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
+        APIGatewayProxyResponseEvent response;
         try {
             AddFavoriteRequest addFavoriteRequest = jsonMapper.beanFrom(AddFavoriteRequest.class, input.getBody());
             Favorite savedFavorite = favoriteService.add(addFavoriteRequest);
             LOG.info("Favorite created: {}", savedFavorite);
 
-            response = APIGatewayV2HTTPResponse.builder()
+            response = new APIGatewayProxyResponseEvent()
                     .withStatusCode(HttpStatusCode.OK)
-                    .withBody(jsonMapper.asString(savedFavorite))
-                    .build();
+                    .withBody(jsonMapper.asString(savedFavorite));
 
         } catch (Exception ex) {
             LOG.error("Exception: {}", ex.getMessage());
@@ -46,9 +47,8 @@ public class AddFavoriteLambda extends TracingRequestWrapper {
         return response;
     }
 
-    private APIGatewayV2HTTPResponse createErrorResponse() {
-        return APIGatewayV2HTTPResponse.builder()
-                .withStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR)
-                .build();
+    private APIGatewayProxyResponseEvent createErrorResponse() {
+        return new APIGatewayProxyResponseEvent()
+                .withStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
     }
 }
