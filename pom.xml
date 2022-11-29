@@ -18,25 +18,14 @@
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
 
         <aws.log4j.version>2.13.3</aws.log4j.version>
-        <aws.sdk.version>2.17.6</aws.sdk.version>
+        <aws.sdk.version>2.18.25</aws.sdk.version>
         <aws.lambda-core.version>1.2.1</aws.lambda-core.version>
-        <aws.lambda-events.version>3.9.0</aws.lambda-events.version>
+        <aws.lambda-events.version>3.11.0</aws.lambda-events.version>
         <symphonia.logging.version>1.0.3</symphonia.logging.version>
-        <jackson-jr.version>2.13.0-rc1</jackson-jr.version>
+        <jackson-jr.version>2.14.1</jackson-jr.version>
     </properties>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-                <version>2.9.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- AWS Events -->
@@ -48,7 +37,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-core</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
 
         <dependency>
@@ -80,12 +69,6 @@
             <version>${aws.sdk.version}-PREVIEW</version>
         </dependency>
 
-        <!-- Tracing -->
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-xray-recorder-sdk-aws-sdk-v2</artifactId>
-        </dependency>
-
 
         <!-- Logging -->
         <dependency>
@@ -94,51 +77,6 @@
             <version>1.0.3</version>
             <classifier>no-config</classifier>
         </dependency>
-        <dependency>
-            <groupId>ch.qos.logback.contrib</groupId>
-            <artifactId>logback-jackson</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback.contrib</groupId>
-            <artifactId>logback-json-classic</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-
-
-        <!-- OpenTelemetry -->
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-api</artifactId>
-            <version>1.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-api-metrics</artifactId>
-            <version>1.5.0-alpha</version>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.0-M1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.20.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.11.2</version>
-            <scope>test</scope>
-        </dependency>
-
-
     </dependencies>
 
     <build>

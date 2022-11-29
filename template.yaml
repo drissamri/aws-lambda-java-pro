@@ -16,7 +16,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: java11
-      MemorySize: 3072
+      MemorySize: 2048
+      Architectures:
+        - arm64
       Handler: com.drissamri.favorites.AddFavoriteLambda::handleRequest
       CodeUri: target/lambda.zip
       Policies:
@@ -24,14 +26,13 @@ Resources:
             TableName: !Ref FavoritesTable
       Tracing: Active
       Timeout: 30
-      Layers:
-        - arn:aws:lambda:eu-west-1:901920570463:layer:aws-otel-java-wrapper-ver-1-5-0:2
       Environment:
         Variables:
-          AWS_LAMBDA_EXEC_WRAPPER: /opt/otel-proxy-handler
           ENVIRONMENT: !Ref Environment
           FAVORITE_TABLE: !Ref FavoritesTable
-
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1 # https://aws.amazon.com/blogs/compute/optimizing-aws-lambda-function-performance-for-java/
+      SnapStart:
+        ApplyOn: PublishedVersions
       Events:
         addFavorite:
           Type: Api
