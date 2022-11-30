@@ -22,8 +22,8 @@ public class AddFavoriteLambda {
     }
 
     public AddFavoriteLambda(FavoriteService favoriteService, JSON jsonMapper) {
-        this.favoriteService = favoriteService;
         this.jsonMapper = jsonMapper;
+        this.favoriteService = favoriteService;
     }
 
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {

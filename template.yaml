@@ -16,23 +16,22 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: java11
+      AutoPublishAlias: live
+      SnapStart:
+        ApplyOn: PublishedVersions
       MemorySize: 2048
-      Architectures:
-        - arm64
       Handler: com.drissamri.favorites.AddFavoriteLambda::handleRequest
       CodeUri: target/lambda.zip
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FavoritesTable
-      Tracing: Active
+
       Timeout: 30
       Environment:
         Variables:
           ENVIRONMENT: !Ref Environment
           FAVORITE_TABLE: !Ref FavoritesTable
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1 # https://aws.amazon.com/blogs/compute/optimizing-aws-lambda-function-performance-for-java/
-      SnapStart:
-        ApplyOn: PublishedVersions
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Events:
         addFavorite:
           Type: Api
@@ -55,5 +54,5 @@ Resources:
 
 Outputs:
   AddFavoriteApiEndpoint:
-    Description: "REST API endpoint URL"
+    Description: "REST API endpoint URLL"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/favorites"

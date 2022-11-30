@@ -3,14 +3,14 @@ import {check } from 'k6';
 
 export let options = {
     stages: [
-        { duration: "120s", target: 50 }, // simulate ramp-up of traffic
-        { duration: "60s", target: 100 }, // stay at 10 users
-        { duration: "120s", target: 50 }, // ramp-down to 0 users
+        { duration: "10s", target: 20 }, // simulate ramp-up of traffic
+        { duration: "10s", target: 150 }, // stay at 10 users
+        { duration: "10s", target: 25 }, // ramp-down to 0 users
     ]
 };
 
 export default () => {
-    var url = 'https://a1fd3oa3h8.execute-api.eu-west-1.amazonaws.com/favorites';
+    var url = 'https://sc9ghyme32.execute-api.eu-west-1.amazonaws.com/Prod/favorites';
     var payload = JSON.stringify({
         name: 'driss',
     });

@@ -13,3 +13,18 @@ filter @type = "REPORT"
  | sort by @log, coldstart
 ```
 p99: 1,7s
+
+```  
+{
+  "functionName": "favorites-api-AddFavoriteLambda-QWiDINNwGiM2",
+  "memorySize": 2048,
+  "coldStarts": 82,
+  "min": 1593.53,
+  "p25": 1683.06,
+  "median": 1719.18,
+  "p75": 1739.2,
+  "p95": 1776.18,
+  "max": 1792.71,
+  "stddev": 43.4565
+}
+```

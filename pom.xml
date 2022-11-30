@@ -18,7 +18,7 @@
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
 
         <aws.log4j.version>2.13.3</aws.log4j.version>
-        <aws.sdk.version>2.18.25</aws.sdk.version>
+        <aws.sdk.version>2.18.27</aws.sdk.version>
         <aws.lambda-core.version>1.2.1</aws.lambda-core.version>
         <aws.lambda-events.version>3.11.0</aws.lambda-events.version>
         <symphonia.logging.version>1.0.3</symphonia.logging.version>
